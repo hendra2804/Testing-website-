@@ -22,49 +22,28 @@
             color: var(--text-main);
         }
 
-        /* --- NEW TOGGLE STYLING --- */
-        .selector-container {
+        /* --- NAVIGATION TABS --- */
+        .nav-tabs {
             max-width: 850px;
-            margin: 0 auto 30px auto;
+            margin: 0 auto 20px auto;
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            gap: 10px;
         }
-
-        .toggle-btn {
-            padding: 15px 40px;
-            font-size: 18px;
+        .nav-tabs button {
+            flex: 1;
+            padding: 15px;
             font-weight: bold;
-            border: 2px solid var(--border-color);
-            background: white;
             cursor: pointer;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            color: #555;
+            border: 1px solid var(--border-color);
+            background: #fff;
+            border-radius: 8px;
+            font-size: 16px;
         }
-
-        .toggle-btn.active-buyer {
-            background: var(--remax-blue);
-            color: white;
-            border-color: var(--remax-blue);
-            box-shadow: 0 4px 15px rgba(0, 61, 165, 0.3);
-        }
-
-        .toggle-btn.active-seller {
-            background: var(--remax-red);
-            color: white;
-            border-color: var(--remax-red);
-            box-shadow: 0 4px 15px rgba(225, 27, 34, 0.3);
-        }
+        .nav-tabs .active-b { background: var(--remax-blue); color: white; border-color: var(--remax-blue); }
+        .nav-tabs .active-s { background: var(--remax-red); color: white; border-color: var(--remax-red); }
 
         .form-page { display: none; }
-        .form-page.active { display: block; animation: fadeIn 0.4s ease; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        /* --- END TOGGLE STYLING --- */
+        .form-page.active { display: block; }
 
         .form-wrapper { max-width: 850px; margin: 0 auto; }
 
@@ -91,6 +70,8 @@
         .logo-area span { font-size: 11px; display: block; }
 
         h2 { font-size: 18px; color: var(--remax-blue); border-bottom: 2px solid #eee; padding-bottom: 5px; margin-bottom: 20px; text-transform: uppercase; }
+        .seller-header-text { color: var(--remax-red) !important; }
+        
         label { font-size: 14px; font-weight: 500; display: block; margin-bottom: 5px; }
         
         input[type="text"], input[type="email"], input[type="tel"] {
@@ -120,8 +101,7 @@
         .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .disclaimer { font-size: 11px; font-style: italic; margin-top: -10px; margin-bottom: 15px; }
 
-        /* Submit Buttons */
-        .submit-btn {
+        .btn-submit {
             width: 100%;
             padding: 15px;
             border: none;
@@ -132,25 +112,64 @@
             margin-top: 10px;
             border-radius: 4px;
         }
+
+        /* --- POPUP MODAL STYLES --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .modal-content h3 { color: var(--remax-blue); margin-top: 0; }
+        .btn-close {
+            background: var(--remax-blue);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
-<div class="selector-container">
-    <button id="buy-tab" class="toggle-btn active-buyer" onclick="showForm('buyer')">I AM A BUYER</button>
-    <button id="sell-tab" class="toggle-btn" onclick="showForm('seller')">I AM A SELLER</button>
+<div id="successModal" class="modal-overlay">
+    <div class="modal-content">
+        <h3>Submission Successful!</h3>
+        <p>Thank you. Your information has been sent to RE/MAX Hallmark.</p>
+        <button class="btn-close" onclick="closeModal()">OK</button>
+    </div>
+</div>
+
+<div class="nav-tabs">
+    <button id="btn-b" class="active-b" onclick="tab('buyer')">BUYER FORM</button>
+    <button id="btn-s" onclick="tab('seller')">SELLER FORM</button>
 </div>
 
 <div class="form-wrapper">
 
-    <div id="buyer-page" class="form-page active">
-        <form id="buyer-form">
+    <!-- BUYER FORM -->
+    <div id="p-buyer" class="form-page active">
+        <form id="form-buyer">
             <div class="card header-card">
                 <div class="title-area">
                     <h1>Buyer Form</h1>
                     <div style="margin-top:15px;">
                         <label>PROPERTY ADDRESS:</label>
-                        <input type="text" name="address" style="width: 400px;">
+                        <input type="text" name="Address" style="width: 400px;">
                     </div>
                 </div>
                 <div class="logo-area">
@@ -163,85 +182,56 @@
                 <h2>Contact Details</h2>
                 <div class="row">
                     <div class="col">
-                        <label>Full Name:</label><input type="text" name="name">
-                        <label>Email Address:</label><input type="email" name="email">
-                        <label>Phone Number:</label><input type="tel" name="phone">
-                        <label>Occupation (FINTRAC Purpose):</label><input type="text" name="occ">
-                        <label>Spouse's Name:</label><input type="text" name="spouse">
-                        <label>Spouse's Email Address:</label><input type="email" name="semail">
-                        <label>Spouse's Phone Number:</label><input type="tel" name="sphone">
-                        <label>Spouse Occupation (FINTRAC Purpose):</label><input type="text" name="socc">
+                        <label>Full Name:</label><input type="text" name="Full_Name">
+                        <label>Email Address:</label><input type="email" name="Email">
+                        <label>Phone Number:</label><input type="tel" name="Phone">
+                        <label>Occupation (FINTRAC Purpose):</label><input type="text" name="Occupation">
+                        <label>Spouse's Name:</label><input type="text" name="Spouse_Name">
+                        <label>Spouse's Email Address:</label><input type="email" name="Spouse_Email">
                     </div>
                     <div class="col">
-                        <div class="checkbox-row"><label>Children:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>How Many And Age:</label><input type="text">
-                        <div class="checkbox-row"><label>Pets:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>Specify:</label><input type="text">
-                        <label>Preferred Method Communication:</label>
-                        <div class="checkbox-row"><input type="checkbox"> WhatsApp Group</div>
-                        <div class="checkbox-row"><input type="checkbox"> Email</div>
-                        <div class="checkbox-row"><input type="checkbox"> Text</div>
-                        <div class="checkbox-row"><input type="checkbox"> Phone Call</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>Property Information</h2>
-                <div class="row">
-                    <div class="col">
-                        <label>Interested in:</label>
-                        <div class="checkbox-row"><input type="checkbox"> New <input type="checkbox"> Resale <input type="checkbox"> Both</div>
-                        <div class="checkbox-row"><label>First Time Home Buyer:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <div class="checkbox-row"><label>Pre-Approval:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>Specify: $</label><input type="text" style="width:150px;">
-                    </div>
-                    <div class="col">
-                        <label>Preferred Days and Time to view properties:</label><input type="text">
-                        <label>Move-In Date to New House:</label>
                         <div class="checkbox-row">
-                            <input type="checkbox"> <1 Month <input type="checkbox"> 1-2 Months 
-                            <input type="checkbox"> 2-4 Months <input type="checkbox"> >4 Months
+                            <label>Children:</label> 
+                            <input type="checkbox" name="b_children" onclick="onlyOne(this)"> YES 
+                            <input type="checkbox" name="b_children" onclick="onlyOne(this)"> NO
                         </div>
-                    </div>
-                </div>
-                <label>Type / Style Property that you'd interested in for purchasing:</label>
-                <div class="grid-container">
-                    <div>
-                        <div class="checkbox-row"><input type="checkbox"> Detached</div>
-                        <div class="checkbox-row"><input type="checkbox"> Semi-Detached</div>
-                    </div>
-                    <div>
-                        <div class="checkbox-row"><input type="checkbox"> Townhouse</div>
-                        <div class="checkbox-row"><input type="checkbox"> Commercial</div>
+                        <label>How Many And Age:</label><input type="text" name="Children_Details">
+                        <div class="checkbox-row">
+                            <label>Pets:</label> 
+                            <input type="checkbox" name="b_pets" onclick="onlyOne(this)"> YES 
+                            <input type="checkbox" name="b_pets" onclick="onlyOne(this)"> NO
+                        </div>
+                        <label>Specify:</label><input type="text" name="Pets_Details">
+                        <label>Preferred Method Communication:</label>
+                        <div class="checkbox-row"><input type="checkbox" name="Comm" onclick="onlyOne(this)"> WhatsApp Group</div>
+                        <div class="checkbox-row"><input type="checkbox" name="Comm" onclick="onlyOne(this)"> Email</div>
+                        <div class="checkbox-row"><input type="checkbox" name="Comm" onclick="onlyOne(this)"> Text</div>
+                        <div class="checkbox-row"><input type="checkbox" name="Comm" onclick="onlyOne(this)"> Phone Call</div>
                     </div>
                 </div>
             </div>
 
             <div class="card">
-                <h2>Get to know more about you:</h2>
-                <label>What is your family's favourite Sport?</label><input type="text">
-                <label>What is your family's favourite Holiday?</label><input type="text">
-                <label>What is your family's favourite Activity?</label><input type="text">
-                <label>Is there anything we can do to make this process more convenient and enjoyable for you?</label><input type="text">
-                
-                <button type="submit" class="submit-btn" style="background: var(--remax-blue);">SUBMIT BUYER FORM</button>
+                <h2>Get to know more about you</h2>
+                <label>What is the name of your favourite Restaurant?</label><input type="text" name="Fav_Rest">
+                <label>What is your family's favourite Holiday?</label><input type="text" name="Fav_Hol">
+                <label>What is your family's favourite Activity?</label><input type="text" name="Fav_Act">
+                <label>Is there anything we can do to make this process more convenient and enjoyable for you?</label><input type="text" name="Convenience">
+                <button type="submit" class="btn-submit" style="background: var(--remax-blue);">SUBMIT BUYER FORM</button>
             </div>
-
-            <div class="fintrac-footer">
-                PLEASE PROVIDE YOUR ID (I.E DRIVER LICENCE) ALONG WITH THE FORM TO SUBMIT **FINTRAC PURPOSE**
-            </div>
+            <div class="fintrac-footer">PLEASE PROVIDE YOUR ID (I.E DRIVER LICENCE) ALONG WITH THE FORM TO SUBMIT **FINTRAC PURPOSE**</div>
         </form>
     </div>
 
-    <div id="seller-page" class="form-page">
-        <form id="seller-form">
+    <!-- SELLER FORM -->
+    <div id="p-seller" class="form-page">
+        <form id="form-seller">
             <div class="card header-card seller-header">
                 <div class="title-area">
                     <h1>Seller Form</h1>
                     <div style="margin-top:15px;">
                         <label>PROPERTY ADDRESS:</label>
-                        <input type="text" name="address" style="width: 400px;">
+                        <input type="text" name="Address" style="width: 400px;">
                     </div>
                 </div>
                 <div class="logo-area">
@@ -251,133 +241,123 @@
             </div>
 
             <div class="card">
-                <h2>CONTACT DETAILS</h2>
-                <div class="row">
+                <h2 class="seller-header-text">Contact Details</h2>
+                <div class="row"> <!-- Added missing row container -->
                     <div class="col">
-                        <label>Full Name:</label><input type="text">
-                        <label>Email Address:</label><input type="email">
-                        <label>Phone Number:</label><input type="tel">
-                        <label>Occupation (FINTRAC Purpose):</label><input type="text">
-                        <label>Spouse's Name:</label><input type="text">
-                        <label>Spouse's Email Address:</label><input type="email">
-                        <label>Spouse's Phone Number:</label><input type="tel">
-                        <label>Spouse Occupation (FINTRAC Purpose):</label><input type="text">
+                        <label>Full Name:</label><input type="text" name="Full_Name">
+                        <label>Email Address:</label><input type="email" name="Email">
+                        <label>Phone Number:</label><input type="tel" name="Phone">
+                        <label>Occupation (FINTRAC Purpose):</label><input type="text" name="Occupation">
+                        <label>Spouse's Name:</label><input type="text" name="Spouse_Name">
+                        <label>Spouse's Email Address:</label><input type="email" name="Spouse_Email">
                     </div>
                     <div class="col">
-                        <div class="checkbox-row"><label>Children:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>How Many And Age:</label><input type="text">
-                        <div class="checkbox-row"><label>Pets:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>Specify:</label><input type="text">
+                        <div class="checkbox-row">
+                            <label>Children:</label> 
+                            <input type="checkbox" name="s_children" onclick="onlyOne(this)"> YES 
+                            <input type="checkbox" name="s_children" onclick="onlyOne(this)"> NO
+                        </div>
+                        <label>How Many And Age:</label><input type="text" name="Children_Details">
+                        <div class="checkbox-row">
+                            <label>Pets:</label> 
+                            <input type="checkbox" name="s_pets" onclick="onlyOne(this)"> YES 
+                            <input type="checkbox" name="s_pets" onclick="onlyOne(this)"> NO
+                        </div>
+                        <label>Specify:</label><input type="text" name="Pets_Details">
                         <label>Preferred Method Communication:</label>
-                        <div class="checkbox-row"><input type="checkbox"> WhatsApp Group</div>
-                        <div class="checkbox-row"><input type="checkbox"> Email</div>
-                        <div class="checkbox-row"><input type="checkbox"> Text</div>
-                        <div class="checkbox-row"><input type="checkbox"> Phone Call</div>
+                        <div class="checkbox-row"><input type="checkbox" name="Comm_S" onclick="onlyOne(this)"> WhatsApp Group</div>
+                        <div class="checkbox-row"><input type="checkbox" name="Comm_S" onclick="onlyOne(this)"> Email</div>
+                        <div class="checkbox-row"><input type="checkbox" name="Comm_S" onclick="onlyOne(this)"> Text</div>
+                        <div class="checkbox-row"><input type="checkbox" name="Comm_S" onclick="onlyOne(this)"> Phone Call</div>
                     </div>
                 </div>
             </div>
 
             <div class="card">
-                <h2>Property Information</h2>
+                <h2 class="seller-header-text">Property Information</h2>
                 <div class="row">
                     <div class="col">
                         <label>Type:</label>
-                        <div class="checkbox-row"><input type="checkbox"> Freehold <input type="checkbox"> Condominium</div>
-                        <div class="checkbox-row"><label>Maintenance Fee:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>• If Yes, Whats included:</label><input type="text">
-                        <div class="checkbox-row"><label>Rental Items:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>• If Yes, Please Specify:</label><input type="text">
+                        <div class="checkbox-row"><input type="checkbox" name="s_type" onclick="onlyOne(this)"> Freehold <input type="checkbox" name="s_type" onclick="onlyOne(this)"> Condominium</div>
+                        <div class="checkbox-row"><label>Maintenance Fee:</label> <input type="checkbox" name="s_maint" onclick="onlyOne(this)"> YES <input type="checkbox" name="s_maint" onclick="onlyOne(this)"> NO</div>
+                        <label>• If Yes, Whats included:</label><input type="text" name="Main_Included">
+                        <div class="checkbox-row"><label>Rental Items:</label> <input type="checkbox" name="s_rent" onclick="onlyOne(this)"> YES <input type="checkbox" name="s_rent" onclick="onlyOne(this)"> NO</div>
+                        <label>When would you like to go on the market?</label><input type="text" name="Market_Date">
                     </div>
                     <div class="col">
-                        <label>Property Tax: $</label><input type="text">
-                        <label>Unit Size (in SqFt):</label><input type="text">
-                        <div class="checkbox-row"><label>Have you been upgraded the house?</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>• If Yes, Please specify:</label><input type="text">
-                        <div class="checkbox-row"><label>Occupancy:</label> <input type="checkbox"> Vacant <input type="checkbox"> Tenanted</div>
-                        <label>. If Tenanted, Please provide their Number & Email:</label><input type="text">
+                        <label>Property Tax: $</label><input type="text" name="Prop_Tax">
+                        <label>Unit Size (in SqFt):</label><input type="text" name="Unit_Size">
+                        <div class="checkbox-row"><label>Upgraded house?</label> <input type="checkbox" name="s_upg" onclick="onlyOne(this)"> YES <input type="checkbox" name="s_upg" onclick="onlyOne(this)"> NO</div>
+                        <div class="checkbox-row"><label>Occupancy:</label> <input type="checkbox" name="s_occ" onclick="onlyOne(this)"> Vacant <input type="checkbox" name="s_occ" onclick="onlyOne(this)"> Tenanted</div>
                     </div>
                 </div>
-                <label>When would you like to go on the market?</label><input type="text">
             </div>
 
             <div class="card">
                 <div class="grid-container">
                     <div style="border-right: 1px solid #eee; padding-right: 20px;">
-                        <h2>Showing Preference</h2>
-                        <label>Showing Windows (usually 8 am - 8:30 pm):</label><input type="text">
-                        <label>How many hours notice before the showing?</label>
-                        <div class="checkbox-row">
-                            <input type="checkbox"> None <input type="checkbox"> 2-4H 
-                            <input type="checkbox"> Overnight <input type="checkbox"> 24H
-                        </div>
+                        <h2 class="seller-header-text">Showing Preference</h2>
+                        <label>Showing Windows (usually 8 am - 8:30 pm):</label><input type="text" name="Showing_Windows">
+                        <label>How many hours notice?</label>
+                        <div class="checkbox-row"><input type="checkbox" name="s_notice" onclick="onlyOne(this)"> None <input type="checkbox" name="s_notice" onclick="onlyOne(this)"> 2-4H <input type="checkbox" name="s_notice" onclick="onlyOne(this)"> 24H</div>
                         <label>Access:</label>
-                        <div class="checkbox-row"><input type="checkbox"> Direct <input type="checkbox"> Lockbox</div>
-                        <p class="disclaimer">**Direct: must be present at all time during the showing**</p>
+                        <div class="checkbox-row"><input type="checkbox" name="s_access" onclick="onlyOne(this)"> Direct <input type="checkbox" name="s_access" onclick="onlyOne(this)"> Lockbox</div>
+                        <p class="disclaimer">**Direct: must be present at all time**</p>
                     </div>
                     <div>
-                        <h2>General Questions</h2>
-                        <div class="checkbox-row"><label>Would you like to have open house?</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>What is the name of your favourite Restaurant?</label><input type="text">
-                        <label>What is your family's favourite Holiday?</label><input type="text">
-                        <label>What is your family's favourite Activity?</label><input type="text">
-                        <label>Is there anything we can do to make this process more convenient and enjoyable for you?</label><input type="text">
+                        <h2 class="seller-header-text">General Questions</h2>
+                        <label>What is the name of your favourite Restaurant?</label><input type="text" name="Fav_Rest">
+                        <label>What is your family's favourite Holiday?</label><input type="text" name="Fav_Hol">
+                        <label>What is your family's favourite Activity?</label><input type="text" name="Fav_Act">
+                        <label>Is there anything we can do to make this process more convenient and enjoyable for you?</label><input type="text" name="Convenience">
                     </div>
                 </div>
-                
-                <button type="submit" class="submit-btn" style="background: var(--remax-red);">SUBMIT SELLER FORM</button>
+                <button type="submit" class="btn-submit" style="background: var(--remax-red);">SUBMIT SELLER FORM</button>
             </div>
-
-            <div class="fintrac-footer">
-                PLEASE PROVIDE YOUR ID (I.E DRIVER LICENCE) ALONG WITH THE FORM TO SUBMIT **FINTRAC PURPOSE**
-            </div>
+            <div class="fintrac-footer">PLEASE PROVIDE YOUR ID (I.E DRIVER LICENCE) ALONG WITH THE FORM TO SUBMIT **FINTRAC PURPOSE**</div>
         </form>
     </div>
 
 </div>
 
 <script>
-    // TOGGLE FUNCTION
-    function showForm(type) {
-        const buyerPage = document.getElementById('buyer-page');
-        const sellerPage = document.getElementById('seller-page');
-        const buyTab = document.getElementById('buy-tab');
-        const sellTab = document.getElementById('sell-tab');
-
-        if (type === 'buyer') {
-            buyerPage.classList.add('active');
-            sellerPage.classList.remove('active');
-            buyTab.classList.add('active-buyer');
-            sellTab.classList.remove('active-seller');
-        } else {
-            sellerPage.classList.add('active');
-            buyerPage.classList.remove('active');
-            sellTab.classList.add('active-seller');
-            buyTab.classList.remove('active-buyer');
-        }
+    function tab(t) {
+        document.getElementById('p-buyer').classList.toggle('active', t === 'buyer');
+        document.getElementById('p-seller').classList.toggle('active', t === 'seller');
+        document.getElementById('btn-b').className = (t === 'buyer' ? 'active-b' : '');
+        document.getElementById('btn-s').className = (t === 'seller' ? 'active-s' : '');
     }
 
-    // GOOGLE DRIVE SUBMIT LOGIC
-    const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'; // Replace with your URL
+    function onlyOne(checkbox) {
+        var checkboxes = document.getElementsByName(checkbox.name);
+        checkboxes.forEach((item) => { if (item !== checkbox) item.checked = false; });
+    }
 
-    const forms = [document.getElementById('buyer-form'), document.getElementById('seller-form')];
-    forms.forEach(form => {
-        form.addEventListener('submit', e => {
+    function openModal() {
+        document.getElementById('successModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('successModal').style.display = 'none';
+    }
+
+    const scriptURL = 'YOUR_APPS_SCRIPT_URL_HERE';
+    [document.getElementById('form-buyer'), document.getElementById('form-seller')].forEach(f => {
+        f.addEventListener('submit', e => {
             e.preventDefault();
-            const btn = form.querySelector('button[type="submit"]');
-            btn.disabled = true;
-            btn.innerText = "Submitting...";
-
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    alert('Success! Form sent to Google Drive.');
-                    btn.disabled = false;
-                    btn.innerText = "SUBMIT FORM";
-                    form.reset();
+            const b = f.querySelector('.btn-submit');
+            const originalText = b.innerText;
+            b.innerText = "Sending...";
+            
+            fetch(scriptURL, { method: 'POST', body: new FormData(f)})
+                .then(r => { 
+                    openModal();
+                    f.reset(); 
+                    b.innerText = originalText; 
                 })
-                .catch(error => {
-                    console.error('Error!', error.message);
-                    alert('Submission failed. Check Console.');
-                    btn.disabled = false;
+                .catch(e => { 
+                    alert('Error submitting form. Please try again.'); 
+                    b.innerText = originalText; 
                 });
         });
     });
