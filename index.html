@@ -58,7 +58,6 @@
         .form-section { display: none; }
         .form-section.active { display: block; }
 
-        /* CARDS - Opacity allows watermark to show through */
         .card {
             background: rgba(255, 255, 255, 0.94); 
             border: 1px solid var(--border-color);
@@ -67,7 +66,6 @@
             position: relative;
         }
 
-        /* HEADER DESIGN */
         .header-card {
             border-top: none;
             background-color: var(--remax-blue);
@@ -106,6 +104,13 @@
             margin-bottom: 15px;
             outline: none;
             background: transparent;
+        }
+
+        /* Styling for the file upload input */
+        input[type="file"] {
+            padding: 10px 0;
+            margin-bottom: 15px;
+            font-size: 14px;
         }
 
         .row { display: flex; gap: 30px; flex-wrap: wrap; }
@@ -149,13 +154,10 @@
         <button id="btn-s" class="tab-btn" onclick="tab('seller')">Seller Form</button>
     </div>
 
-    <!-- BUYER FORM -->
     <div id="p-buyer" class="form-section active">
         <form id="buyer-form">
             <div class="card header-card">
-                <div class="title-area">
-                    <h1>Buyer Form</h1>
-                </div>
+                <div class="title-area"><h1>Buyer Form</h1></div>
                 <div class="logo-area-img">
                     <img src="https://github.com/hendra2804/Testing-website-/blob/main/logo_remax.jpeg?raw=true" alt="RE/MAX">
                 </div>
@@ -193,7 +195,6 @@
                 </div>
             </div>
 
-            <!-- ... (Other Buyer Cards) ... -->
             <div class="card">
                 <h2>Property Information</h2>
                 <div class="row">
@@ -215,18 +216,21 @@
                 </div>
             </div>
 
+            <div class="card">
+                <h2>Driver's License UPLOAD</h2>
+                <label>Please upload a clear photo of your Driver's License:</label>
+                <input type="file" name="buyer_id_file" accept="image/*,.pdf">
+            </div>
+
             <button type="submit" class="btn-submit">SUBMIT BUYER FORM</button>
             <div class="fintrac-footer">PLEASE PROVIDE YOUR ID (I.E DRIVER LICENCE) ALONG WITH THE FORM TO SUBMIT **FINTRAC PURPOSE**</div>
         </form>
     </div>
 
-    <!-- SELLER FORM (No changes to fields) -->
     <div id="p-seller" class="form-section">
         <form id="seller-form">
             <div class="card header-card seller-header">
-                <div class="title-area">
-                    <h1>Seller Form</h1>
-                </div>
+                <div class="title-area"><h1>Seller Form</h1></div>
                 <div class="logo-area-img">
                     <img src="https://github.com/hendra2804/Testing-website-/blob/main/logo_remax.jpeg?raw=true" alt="RE/MAX">
                 </div>
@@ -310,6 +314,12 @@
                         <label>Is there anything we can do to make this process more convenient and enjoyable for you?</label><input type="text">
                     </div>
                 </div>
+            </div>
+
+            <div class="card">
+                <h2>Driver's License UPLOAD</h2>
+                <label>Please upload a clear photo of your Driver's License:</label>
+                <input type="file" name="seller_id_file" accept="image/*,.pdf">
             </div>
 
             <button type="submit" class="btn-submit">SUBMIT SELLER FORM</button>
