@@ -15,100 +15,82 @@ body {
   color: var(--text-main);
 }
 
-/* --- NAVIGATION TABS --- */
-.nav-tabs {
-  max-width: 850px;
-  margin: 0 auto 20px auto;
-  display: flex;
-  gap: 10px;
-}
-.nav-tabs button {
-  flex: 1;
-  padding: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  border: 1px solid var(--border-color);
-  background: #fff;
-  border-radius: 8px;
-  font-size: 16px;
-}
-.nav-tabs .active-b {
-  background: var(--remax-blue);
-  color: white;
-  border-color: var(--remax-blue);
-}
-.nav-tabs .active-s {
-  background: var(--remax-red);
-  color: white;
-  border-color: var(--remax-red);
-}
-
-.form-page {
-  display: none;
-}
-.form-page.active {
-  display: block;
-}
-
+/* --- FORM WRAPPER & WATERMARK --- */
+/* This adds the Team Asgarian logo as a background watermark */
 .form-wrapper {
   max-width: 850px;
   margin: 0 auto;
+  background-image: url('https://github.com/hendra2804/Testing-website-/blob/main/logo_asgarian.jpeg?raw=true');
+  background-repeat: no-repeat;
+  background-position: center 60%;
+  background-size: 80%;
+  background-attachment: scroll;
+  /* Softens the logo to look like the watermark in your screenshot */
+  background-blend-mode: overlay; 
+  position: relative;
 }
 
+/* Ensure the card is slightly transparent to let the watermark show through */
 .card {
-  background: var(--card-white);
+  background: rgba(255, 255, 255, 0.92); 
   border: 1px solid var(--border-color);
   padding: 25px;
   margin-bottom: 15px;
   position: relative;
+  z-index: 1;
 }
 
+/* --- HEADER & LOGO ALIGNMENT --- */
+/* Matches the dark blue bar and logo placement in your screenshot */
 .header-card {
-  border-top: 10px solid var(--remax-blue);
+  background-color: var(--remax-blue);
+  color: white;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-}
-
-.seller-header {
-  border-top-color: var(--remax-red);
+  align-items: center;
+  padding: 0 0 0 20px;
+  height: 100px;
+  overflow: visible;
 }
 
 .title-area h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: bold;
-}
-.logo-area {
-  text-align: right;
-  line-height: 1.2;
-}
-.logo-area strong {
-  font-size: 20px;
-  color: #333;
-}
-.logo-area span {
-  font-size: 11px;
-  display: block;
-}
-
-h2 {
-  font-size: 18px;
-  color: var(--remax-blue);
-  border-bottom: 2px solid #eee;
-  padding-bottom: 5px;
-  margin-bottom: 20px;
   text-transform: uppercase;
 }
-.seller-header-text {
-  color: var(--remax-red) !important;
+
+/* Logo container that overlaps the blue bar */
+.logo-area {
+  background: white;
+  padding: 10px;
+  height: 120px; /* Slightly taller than header to create overlap */
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-label {
-  font-size: 14px;
-  font-weight: 500;
+.remax-logo-img {
+  height: 100%;
+  width: auto;
   display: block;
-  margin-bottom: 5px;
+}
+
+/* --- FORM ELEMENTS --- */
+h2 {
+  font-size: 20px;
+  color: var(--remax-blue);
+  border-bottom: 2px solid var(--remax-blue);
+  padding-bottom: 5px;
+  margin-top: 30px;
+  text-transform: uppercase;
+}
+
+/* Layout for the "Contact Details" section to match the grid in your screenshot */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 40px;
 }
 
 input[type="text"],
@@ -116,99 +98,18 @@ input[type="email"],
 input[type="tel"] {
   width: 100%;
   border: none;
-  border-bottom: 1px solid var(--border-color);
-  padding: 6px 0;
+  border-bottom: 1.5px solid #888;
+  background: transparent;
+  padding: 8px 0;
   margin-bottom: 15px;
   outline: none;
 }
 
-.row {
-  display: flex;
-  gap: 30px;
-  flex-wrap: wrap;
-}
-.col {
-  flex: 1;
-  min-width: 300px;
-}
-
+/* Checkbox styling */
 .checkbox-row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 8px;
+  margin-bottom: 8px;
   font-size: 14px;
-}
-.checkbox-row input {
-  width: 16px;
-  height: 16px;
-}
-
-.fintrac-footer {
-  text-align: center;
-  font-weight: bold;
-  color: #8b0000;
-  margin: 30px 0;
-  font-size: 13px;
-  text-transform: uppercase;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-.disclaimer {
-  font-size: 11px;
-  font-style: italic;
-  margin-top: -10px;
-  margin-bottom: 15px;
-}
-
-.btn-submit {
-  width: 100%;
-  padding: 15px;
-  border: none;
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 10px;
-  border-radius: 4px;
-}
-
-/* --- POPUP MODAL STYLES --- */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
-}
-.modal-content {
-  background: white;
-  padding: 40px;
-  border-radius: 8px;
-  text-align: center;
-  max-width: 400px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-.modal-content h3 {
-  color: var(--remax-blue);
-  margin-top: 0;
-}
-.btn-close {
-  background: var(--remax-blue);
-  color: white;
-  border: none;
-  padding: 10px 25px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 20px;
 }
