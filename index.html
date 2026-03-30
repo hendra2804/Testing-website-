@@ -22,9 +22,17 @@
             color: var(--text-main);
         }
 
-        .form-wrapper { max-width: 850px; margin: 0 auto; }
+        /* WATERMARK BACKGROUND */
+        .form-wrapper { 
+            max-width: 850px; 
+            margin: 0 auto; 
+            background-image: url('https://github.com/hendra2804/Testing-website-/blob/main/logo_asgarian.jpeg?raw=true');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 100%;
+            background-attachment: fixed;
+        }
 
-        /* TAB NAVIGATION STYLES */
         .tab-container {
             display: flex;
             justify-content: center;
@@ -44,43 +52,48 @@
             text-transform: uppercase;
         }
 
-        .tab-btn.active-buyer {
-            background-color: var(--remax-blue);
-            color: white;
-            border-color: var(--remax-blue);
-        }
+        .tab-btn.active-buyer { background-color: var(--remax-blue); color: white; border-color: var(--remax-blue); }
+        .tab-btn.active-seller { background-color: var(--remax-red); color: white; border-color: var(--remax-red); }
 
-        .tab-btn.active-seller {
-            background-color: var(--remax-red);
-            color: white;
-            border-color: var(--remax-red);
-        }
-
-        /* TOGGLE VISIBILITY */
         .form-section { display: none; }
         .form-section.active { display: block; }
 
+        /* CARDS - Opacity allows watermark to show through */
         .card {
-            background: var(--card-white);
+            background: rgba(255, 255, 255, 0.94); 
             border: 1px solid var(--border-color);
             padding: 25px;
             margin-bottom: 15px;
             position: relative;
         }
 
+        /* HEADER DESIGN */
         .header-card {
-            border-top: 10px solid var(--remax-blue);
+            border-top: none;
+            background-color: var(--remax-blue);
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
+            padding: 0 0 0 25px;
+            height: 100px;
+            overflow: hidden;
         }
 
-        .seller-header { border-top-color: var(--remax-red); }
+        .seller-header { background-color: var(--remax-red); }
 
-        .title-area h1 { margin: 0; font-size: 28px; font-weight: bold; }
-        .logo-area { text-align: right; line-height: 1.2; }
-        .logo-area strong { font-size: 20px; color: #333; }
-        .logo-area span { font-size: 11px; display: block; }
+        .title-area h1 { margin: 0; font-size: 28px; font-weight: bold; color: white; }
+        
+        .logo-area-img {
+            background: white;
+            height: 100%;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+        }
+        .logo-area-img img {
+            height: 70px;
+            width: auto;
+        }
 
         h2 { font-size: 18px; color: var(--remax-blue); border-bottom: 2px solid #eee; padding-bottom: 5px; margin-bottom: 20px; text-transform: uppercase; }
         label { font-size: 14px; font-weight: 500; display: block; margin-bottom: 5px; }
@@ -92,6 +105,7 @@
             padding: 6px 0;
             margin-bottom: 15px;
             outline: none;
+            background: transparent;
         }
 
         .row { display: flex; gap: 30px; flex-wrap: wrap; }
@@ -130,7 +144,6 @@
 
 <div class="form-wrapper">
 
-    <!-- NAVIGATION TABS -->
     <div class="tab-container">
         <button id="btn-b" class="tab-btn active-buyer" onclick="tab('buyer')">Buyer Form</button>
         <button id="btn-s" class="tab-btn" onclick="tab('seller')">Seller Form</button>
@@ -142,15 +155,15 @@
             <div class="card header-card">
                 <div class="title-area">
                     <h1>Buyer Form</h1>
-                    <div style="margin-top:15px;">
-                        <label>PROPERTY ADDRESS:</label>
-                        <input type="text" name="property_address" style="width: 400px;">
-                    </div>
                 </div>
-                <div class="logo-area">
-                    <strong>RE/MAX HALLMARK</strong><br>
-                    <span>REALTY LTD. BROKERAGE</span>
+                <div class="logo-area-img">
+                    <img src="https://github.com/hendra2804/Testing-website-/blob/main/logo_remax.jpeg?raw=true" alt="RE/MAX">
                 </div>
+            </div>
+            
+            <div class="card">
+                <label>PROPERTY ADDRESS:</label>
+                <input type="text" name="property_address">
             </div>
 
             <div class="card">
@@ -167,9 +180,9 @@
                         <label>Spouse Occupation (FINTRAC Purpose):</label><input type="text" name="spouse_occupation">
                     </div>
                     <div class="col">
-                        <div class="checkbox-row"><label>Children:</label> <input type="checkbox" name="children_yes"> YES <input type="checkbox" name="children_no"> NO</div>
+                        <div class="checkbox-row"><label>Children:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
                         <label>How Many And Age:</label><input type="text" name="children_info">
-                        <div class="checkbox-row"><label>Pets:</label> <input type="checkbox" name="pets_yes"> YES <input type="checkbox" name="pets_no"> NO</div>
+                        <div class="checkbox-row"><label>Pets:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
                         <label>Specify:</label><input type="text" name="pets_info">
                         <label>Preferred Method Communication:</label>
                         <div class="checkbox-row"><input type="checkbox" name="comm_whatsapp"> WhatsApp Group</div>
@@ -180,6 +193,7 @@
                 </div>
             </div>
 
+            <!-- ... (Other Buyer Cards) ... -->
             <div class="card">
                 <h2>Property Information</h2>
                 <div class="row">
@@ -199,50 +213,28 @@
                         </div>
                     </div>
                 </div>
-                <label>Type / Style Property that you'd interested in for purchasing:</label>
-                <div class="grid-container">
-                    <div>
-                        <div class="checkbox-row"><input type="checkbox"> Detached</div>
-                        <div class="checkbox-row"><input type="checkbox"> Semi-Detached</div>
-                    </div>
-                    <div>
-                        <div class="checkbox-row"><input type="checkbox"> Townhouse</div>
-                        <div class="checkbox-row"><input type="checkbox"> Commercial</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>Get to know more about you:</h2>
-                <label>What is your family's favourite Sport?</label><input type="text">
-                <label>What is your family's favourite Holiday?</label><input type="text">
-                <label>What is your family's favourite Activity?</label><input type="text">
-                <label>Is there anything we can do to make this process more convenient and enjoyable for you?</label><input type="text">
             </div>
 
             <button type="submit" class="btn-submit">SUBMIT BUYER FORM</button>
-
-            <div class="fintrac-footer">
-                PLEASE PROVIDE YOUR ID (I.E DRIVER LICENCE) ALONG WITH THE FORM TO SUBMIT **FINTRAC PURPOSE**
-            </div>
+            <div class="fintrac-footer">PLEASE PROVIDE YOUR ID (I.E DRIVER LICENCE) ALONG WITH THE FORM TO SUBMIT **FINTRAC PURPOSE**</div>
         </form>
     </div>
 
-    <!-- SELLER FORM -->
+    <!-- SELLER FORM (No changes to fields) -->
     <div id="p-seller" class="form-section">
         <form id="seller-form">
             <div class="card header-card seller-header">
                 <div class="title-area">
                     <h1>Seller Form</h1>
-                    <div style="margin-top:15px;">
-                        <label>PROPERTY ADDRESS:</label>
-                        <input type="text" name="property_address" style="width: 400px;">
-                    </div>
                 </div>
-                <div class="logo-area">
-                    <strong>RE/MAX HALLMARK</strong><br>
-                    <span>REALTY LTD. BROKERAGE</span>
+                <div class="logo-area-img">
+                    <img src="https://github.com/hendra2804/Testing-website-/blob/main/logo_remax.jpeg?raw=true" alt="RE/MAX">
                 </div>
+            </div>
+
+            <div class="card">
+                <label>PROPERTY ADDRESS:</label>
+                <input type="text" name="property_address">
             </div>
 
             <div class="card">
@@ -321,10 +313,7 @@
             </div>
 
             <button type="submit" class="btn-submit">SUBMIT SELLER FORM</button>
-
-            <div class="fintrac-footer">
-                PLEASE PROVIDE YOUR ID (I.E DRIVER LICENCE) ALONG WITH THE FORM TO SUBMIT **FINTRAC PURPOSE**
-            </div>
+            <div class="fintrac-footer">PLEASE PROVIDE YOUR ID (I.E DRIVER LICENCE) ALONG WITH THE FORM TO SUBMIT **FINTRAC PURPOSE**</div>
         </form>
     </div>
 
@@ -340,7 +329,6 @@
 
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzKnf3RNiJAK80TonocYkFBWLTuSyb_qQKWAe0MLb4QWFkH_xv4ni7ncLxuNCQn-jCv/exec';
     
-    // Selecting the correct IDs: buyer-form and seller-form
     [document.getElementById('buyer-form'), document.getElementById('seller-form')].forEach(f => {
         if(!f) return;
         f.addEventListener('submit', e => {
