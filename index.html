@@ -8,141 +8,124 @@
         :root {
             --remax-blue: #003da5;
             --remax-red: #e11b22;
-            --bg-color: #f0f2f5;
+            --bg-color: #f4f7fa;
             --card-white: #ffffff;
-            --text-main: #202124;
-            --border-color: #dadce0;
+            --text-main: #2d3748;
+            --text-muted: #718096;
+            --border-color: #e2e8f0;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
             background-color: var(--bg-color);
             margin: 0;
-            padding: 20px;
+            padding: 40px 20px;
             color: var(--text-main);
         }
 
-        /* WATERMARK BACKGROUND */
-        .form-wrapper { 
-            max-width: 850px; 
-            margin: 0 auto; 
-            background-image: url('https://github.com/hendra2804/Testing-website-/blob/main/logo_asgarian.jpeg?raw=true');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: 100%;
-            background-attachment: fixed;
-        }
+        .form-wrapper { max-width: 1000px; margin: 0 auto; }
 
+        /* TABS */
         .tab-container {
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
             gap: 10px;
+            background: #fff;
+            padding: 6px;
+            border-radius: 50px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
         .tab-btn {
-            padding: 12px 30px;
-            font-size: 16px;
-            font-weight: bold;
+            padding: 12px 40px;
+            font-size: 14px;
+            font-weight: 700;
             cursor: pointer;
-            border: 2px solid var(--border-color);
-            background: white;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            border: none;
+            background: transparent;
+            border-radius: 50px;
+            transition: all 0.4s ease;
             text-transform: uppercase;
+            color: var(--text-muted);
         }
 
-        .tab-btn.active-buyer { background-color: var(--remax-blue); color: white; border-color: var(--remax-blue); }
-        .tab-btn.active-seller { background-color: var(--remax-red); color: white; border-color: var(--remax-red); }
+        .tab-btn.active-buyer { background-color: var(--remax-blue); color: white; }
+        .tab-btn.active-seller { background-color: var(--remax-red); color: white; }
 
         .form-section { display: none; }
-        .form-section.active { display: block; }
+        .form-section.active { display: block; animation: formReveal 0.6s ease-out; }
 
+        @keyframes formReveal { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* CARDS & WATERMARK */
         .card {
-            background: rgba(255, 255, 255, 0.94); 
-            border: 1px solid var(--border-color);
-            padding: 25px;
-            margin-bottom: 15px;
             position: relative;
+            background-color: var(--card-white);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            overflow: hidden;
         }
 
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%; height: 60%;
+            background-image: url('https://github.com/hendra2804/Testing-website-/blob/main/logo_asgarian.jpeg?raw=true');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .card > * { position: relative; z-index: 1; }
+
         .header-card {
-            border-top: none;
             background-color: var(--remax-blue);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 0 0 25px;
-            height: 100px;
-            overflow: hidden;
+            padding: 0;
+            height: 130px;
+            border: none;
         }
-
+        .header-card::before { display: none; }
         .seller-header { background-color: var(--remax-red); }
 
-        .title-area h1 { margin: 0; font-size: 28px; font-weight: bold; color: white; }
-        
-        .logo-area-img {
-            background: white;
-            height: 100%;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-        }
-        .logo-area-img img {
-            height: 70px;
-            width: auto;
-        }
+        .title-area h1 { margin-left: 40px; font-size: 32px; font-weight: 800; color: white; text-transform: uppercase; }
+        .logo-area-img { background: white; height: 100%; padding: 0 40px; display: flex; align-items: center; clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%); }
+        .logo-area-img img { height: 70px; width: auto; }
 
-        h2 { font-size: 18px; color: var(--remax-blue); border-bottom: 2px solid #eee; padding-bottom: 5px; margin-bottom: 20px; text-transform: uppercase; }
-        label { font-size: 14px; font-weight: 500; display: block; margin-bottom: 5px; }
-        
-        input[type="text"], input[type="email"], input[type="tel"] {
-            width: 100%;
-            border: none;
-            border-bottom: 1px solid var(--border-color);
-            padding: 6px 0;
-            margin-bottom: 15px;
-            outline: none;
-            background: transparent;
-        }
+        h2 { font-size: 16px; color: var(--remax-blue); border-left: 4px solid var(--remax-blue); padding-left: 15px; margin-bottom: 25px; text-transform: uppercase; font-weight: 800; }
+        #p-seller h2 { color: var(--remax-red); border-left-color: var(--remax-red); }
 
-        /* Styling for the file upload input */
-        input[type="file"] {
-            padding: 10px 0;
-            margin-bottom: 15px;
-            font-size: 14px;
+        label { font-size: 11px; font-weight: 700; display: block; margin-bottom: 8px; color: var(--text-muted); text-transform: uppercase; }
+        
+        input[type="text"], input[type="email"], input[type="tel"], textarea {
+            width: 100%; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-bottom: 20px; outline: none; background: #f8fafc; box-sizing: border-box; font-family: inherit;
         }
 
         .row { display: flex; gap: 30px; flex-wrap: wrap; }
         .col { flex: 1; min-width: 300px; }
 
-        .checkbox-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 14px; }
-        .checkbox-row input { width: 16px; height: 16px; }
+        .checkbox-row { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-size: 13px; font-weight: 600; }
+        .checkbox-row input { width: 18px; height: 18px; cursor: pointer; accent-color: var(--remax-blue); }
+        #p-seller .checkbox-row input { accent-color: var(--remax-red); }
 
-        .fintrac-footer {
-            text-align: center;
-            font-weight: bold;
-            color: #8b0000;
-            margin: 30px 0;
-            font-size: 13px;
-            text-transform: uppercase;
-        }
+        .fintrac-footer { text-align: center; font-weight: 800; color: #c53030; margin: 40px 0; padding: 25px; background: #fff5f5; border: 1px solid #feb2b2; font-size: 11px; border-radius: 12px; }
 
-        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .disclaimer { font-size: 11px; font-style: italic; margin-top: -10px; margin-bottom: 15px; }
-
-        .btn-submit {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background: #333;
-            color: white;
-            border: none;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
+        .btn-submit { display: block; width: 100%; padding: 20px; background: #1a202c; color: white; border: none; font-weight: 700; font-size: 16px; cursor: pointer; border-radius: 12px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .btn-submit:hover { background: #000; transform: translateY(-2px); }
     </style>
 </head>
 <body>
@@ -166,32 +149,42 @@
             <div class="card">
                 <label>PROPERTY ADDRESS:</label>
                 <input type="text" name="property_address">
-            </div>
-
-            <div class="card">
-                <h2>Contact Details</h2>
+                
+                <h2>CONTACT DETAILS</h2>
                 <div class="row">
                     <div class="col">
                         <label>Full Name:</label><input type="text" name="full_name">
                         <label>Email Address:</label><input type="email" name="email">
                         <label>Phone Number:</label><input type="tel" name="phone">
                         <label>Occupation (FINTRAC Purpose):</label><input type="text" name="occupation">
+                    </div>
+                    <div class="col">
                         <label>Spouse's Name:</label><input type="text" name="spouse_name">
                         <label>Spouse's Email Address:</label><input type="email" name="spouse_email">
                         <label>Spouse's Phone Number:</label><input type="tel" name="spouse_phone">
                         <label>Spouse Occupation (FINTRAC Purpose):</label><input type="text" name="spouse_occupation">
                     </div>
+                </div>
+                
+                <div class="row">
                     <div class="col">
-                        <div class="checkbox-row"><label>Children:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>How Many And Age:</label><input type="text" name="children_info">
-                        <div class="checkbox-row"><label>Pets:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>Specify:</label><input type="text" name="pets_info">
-                        <label>Preferred Method Communication:</label>
-                        <div class="checkbox-row"><input type="checkbox" name="comm_whatsapp"> WhatsApp Group</div>
-                        <div class="checkbox-row"><input type="checkbox" name="comm_email"> Email</div>
-                        <div class="checkbox-row"><input type="checkbox" name="comm_text"> Text</div>
-                        <div class="checkbox-row"><input type="checkbox" name="comm_phone"> Phone Call</div>
+                        <label>Children:</label>
+                        <div class="checkbox-row"><input type="checkbox" name="has_children_yes"> YES <input type="checkbox" name="has_children_no"> NO</div>
+                        <label>How Many and Age:</label><input type="text" name="children_info">
                     </div>
+                    <div class="col">
+                        <label>Pets:</label>
+                        <div class="checkbox-row"><input type="checkbox" name="has_pets_yes"> YES <input type="checkbox" name="has_pets_no"> NO</div>
+                        <label>Specify:</label><input type="text" name="pets_info">
+                    </div>
+                </div>
+
+                <label>Preferred Method Communication:</label>
+                <div class="checkbox-row">
+                    <input type="checkbox" name="comm_whatsapp"> WhatsApp Group 
+                    <input type="checkbox" name="comm_email"> Email 
+                    <input type="checkbox" name="comm_text"> Text 
+                    <input type="checkbox" name="comm_phone"> Phone Call
                 </div>
             </div>
 
@@ -200,26 +193,71 @@
                 <div class="row">
                     <div class="col">
                         <label>Interested in:</label>
-                        <div class="checkbox-row"><input type="checkbox"> New <input type="checkbox"> Resale <input type="checkbox"> Both</div>
-                        <div class="checkbox-row"><label>First Time Home Buyer:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <div class="checkbox-row"><label>Pre-Approval:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>Specify: $</label><input type="text" style="width:150px;">
+                        <div class="checkbox-row"><input type="checkbox" name="type_new"> New <input type="checkbox" name="type_resale"> Resale <input type="checkbox" name="type_both"> Both</div>
+                        <label>First Time Home Buyer:</label>
+                        <div class="checkbox-row"><input type="checkbox" name="first_timer_yes"> YES <input type="checkbox" name="first_timer_no"> NO</div>
+                        <label>Pre-Approval:</label>
+                        <div class="checkbox-row"><input type="checkbox" name="preapproved_yes"> YES <input type="checkbox" name="preapproved_no"> NO</div>
+                        <label>Specify Amount ($):</label><input type="text" name="preapproval_amount">
                     </div>
                     <div class="col">
-                        <label>Preferred Days and Time to view properties:</label><input type="text">
                         <label>Move-In Date to New House:</label>
                         <div class="checkbox-row">
-                            <input type="checkbox"> &lt;1 Month <input type="checkbox"> 1-2 Months 
-                            <input type="checkbox"> 2-4 Months <input type="checkbox"> &gt;4 Months
+                            <input type="checkbox" name="move_1m"> &lt;1 Month <input type="checkbox" name="move_2m"> 1-2 Months 
+                            <input type="checkbox" name="move_4m"> 2-4 Months <input type="checkbox" name="move_4plus"> &gt;4 Months
                         </div>
+                        <label>Preferred Days and Time to view properties:</label>
+                        <input type="text" name="viewing_time">
+                    </div>
+                </div>
+
+                <label>Type / Style Property that you'd interested in for purchasing:</label>
+                <div class="checkbox-row">
+                    <input type="checkbox" name="style_detached"> Detached
+                    <input type="checkbox" name="style_semi"> Semi-Detached
+                    <input type="checkbox" name="style_townhouse"> Townhouse
+                    <input type="checkbox" name="style_commercial"> Commercial
+                </div>
+                
+                <div class="row">
+                    <div class="col">
+                        <label>Preferred Price Range:</label><input type="text" name="price_range">
+                        <label>Property Location / Specific Neighbourhood:</label><input type="text" name="location">
+                    </div>
+                    <div class="col">
+                        <label>Specific School/School District:</label><input type="text" name="school_district">
+                        <label>Must Have Features (i.e. Pool, Basement, Garage):</label><textarea name="must_haves" rows="2"></textarea>
                     </div>
                 </div>
             </div>
 
             <div class="card">
-                <h2>Driver's License UPLOAD</h2>
-                <label>Please upload a clear photo of your Driver's License:</label>
-                <input type="file" name="buyer_id_file" accept="image/*,.pdf">
+                <h2>Sold / Purchase History & Current Situation</h2>
+                <div class="row">
+                    <div class="col">
+                        <label>Have you purchased or sold a house before?</label>
+                        <div class="checkbox-row"><input type="checkbox" name="history_yes"> YES <input type="checkbox" name="history_no"> NO</div>
+                        <label>Do you need to sell your property before you buy?</label>
+                        <div class="checkbox-row"><input type="checkbox" name="need_sell_yes"> YES <input type="checkbox" name="need_sell_no"> NO</div>
+                    </div>
+                    <div class="col">
+                        <label>Are you currently in a Lease?</label>
+                        <div class="checkbox-row"><input type="checkbox" name="lease_yes"> YES <input type="checkbox" name="lease_no"> NO</div>
+                        <label>If Yes, specify (When/Where) and Expiry Date:</label>
+                        <input type="text" name="lease_details">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Get to know more about you</h2>
+                <label>What is your family's favourite Sport?</label><input type="text" name="fav_sport">
+                <label>What is your family's favourite Holiday?</label><input type="text" name="fav_holiday">
+                <label>What is your family's favourite Activity?</label><input type="text" name="fav_activity">
+                <label>Is there anything we can do to make this process more enjoyable?</label><textarea name="extra_requests"></textarea>
+                
+                <label>Driver's License UPLOAD (FINTRAC):</label>
+                <input type="file" name="buyer_id_file">
             </div>
 
             <button type="submit" class="btn-submit">SUBMIT BUYER FORM</button>
@@ -239,9 +277,7 @@
             <div class="card">
                 <label>PROPERTY ADDRESS:</label>
                 <input type="text" name="property_address">
-            </div>
-
-            <div class="card">
+                
                 <h2>CONTACT DETAILS</h2>
                 <div class="row">
                     <div class="col">
@@ -249,22 +285,34 @@
                         <label>Email Address:</label><input type="email" name="email">
                         <label>Phone Number:</label><input type="tel" name="phone">
                         <label>Occupation (FINTRAC Purpose):</label><input type="text" name="occupation">
+                    </div>
+                    <div class="col">
                         <label>Spouse's Name:</label><input type="text" name="spouse_name">
                         <label>Spouse's Email Address:</label><input type="email" name="spouse_email">
                         <label>Spouse's Phone Number:</label><input type="tel" name="spouse_phone">
                         <label>Spouse Occupation (FINTRAC Purpose):</label><input type="text" name="spouse_occupation">
                     </div>
+                </div>
+
+                <div class="row">
                     <div class="col">
-                        <div class="checkbox-row"><label>Children:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>How Many And Age:</label><input type="text">
-                        <div class="checkbox-row"><label>Pets:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>Specify:</label><input type="text">
-                        <label>Preferred Method Communication:</label>
-                        <div class="checkbox-row"><input type="checkbox"> WhatsApp Group</div>
-                        <div class="checkbox-row"><input type="checkbox"> Email</div>
-                        <div class="checkbox-row"><input type="checkbox"> Text</div>
-                        <div class="checkbox-row"><input type="checkbox"> Phone Call</div>
+                        <label>Children:</label>
+                        <div class="checkbox-row"><input type="checkbox" name="has_children_yes"> YES <input type="checkbox" name="has_children_no"> NO</div>
+                        <label>How Many and Age:</label><input type="text" name="children_info">
                     </div>
+                    <div class="col">
+                        <label>Pets:</label>
+                        <div class="checkbox-row"><input type="checkbox" name="has_pets_yes"> YES <input type="checkbox" name="has_pets_no"> NO</div>
+                        <label>Specify:</label><input type="text" name="pets_info">
+                    </div>
+                </div>
+
+                <label>Preferred Method Communication:</label>
+                <div class="checkbox-row">
+                    <input type="checkbox" name="comm_whatsapp"> WhatsApp Group 
+                    <input type="checkbox" name="comm_email"> Email 
+                    <input type="checkbox" name="comm_text"> Text 
+                    <input type="checkbox" name="comm_phone"> Phone Call
                 </div>
             </div>
 
@@ -273,53 +321,61 @@
                 <div class="row">
                     <div class="col">
                         <label>Type:</label>
-                        <div class="checkbox-row"><input type="checkbox"> Freehold <input type="checkbox"> Condominium</div>
-                        <div class="checkbox-row"><label>Maintenance Fee:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>• If Yes, Whats included:</label><input type="text">
-                        <div class="checkbox-row"><label>Rental Items:</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>• If Yes, Please Specify:</label><input type="text">
+                        <div class="checkbox-row"><input type="checkbox" name="type_freehold"> Freehold <input type="checkbox" name="type_condo"> Condominium</div>
+                        <label>Maintenance Fee:</label>
+                        <div class="checkbox-row"><input type="checkbox" name="maint_yes"> YES <input type="checkbox" name="maint_no"> NO</div>
+                        <label>• If Yes, Whats included:</label><input type="text" name="maint_details">
+                        <label>Rental Items (e.g. Water Heater):</label>
+                        <div class="checkbox-row"><input type="checkbox" name="rental_yes"> YES <input type="checkbox" name="rental_no"> NO</div>
+                        <label>• If Yes, Please Specify:</label><input type="text" name="rental_details">
                     </div>
                     <div class="col">
-                        <label>Property Tax: $</label><input type="text">
-                        <label>Unit Size (in SqFt):</label><input type="text">
-                        <div class="checkbox-row"><label>Have you been upgraded the house?</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>• If Yes, Please specify:</label><input type="text">
-                        <div class="checkbox-row"><label>Occupancy:</label> <input type="checkbox"> Vacant <input type="checkbox"> Tenanted</div>
-                        <label>. If Tenanted, Please provide their Number & Email:</label><input type="text">
+                        <label>Property Tax: $</label><input type="text" name="property_tax">
+                        <label>Unit Size (in SqFt):</label><input type="text" name="unit_size">
+                        <label>Have you been upgraded the house?</label>
+                        <div class="checkbox-row"><input type="checkbox" name="upgrade_yes"> YES <input type="checkbox" name="upgrade_no"> NO</div>
+                        <label>• If Yes, Please specify:</label><textarea name="upgrade_details" rows="2"></textarea>
                     </div>
                 </div>
-                <label>When would you like to go on the market?</label><input type="text">
+                <div class="row">
+                    <div class="col">
+                        <label>Occupancy:</label>
+                        <div class="checkbox-row"><input type="checkbox" name="occ_vacant"> Vacant <input type="checkbox" name="occ_tenanted"> Tenanted</div>
+                        <label>If Tenanted, provide Number & Email:</label><input type="text" name="tenant_contact">
+                    </div>
+                    <div class="col">
+                        <label>When would you like to go on the market?</label><input type="text" name="market_date">
+                    </div>
+                </div>
             </div>
 
             <div class="card">
-                <div class="grid-container">
-                    <div style="border-right: 1px solid #eee; padding-right: 20px;">
+                <div class="row">
+                    <div class="col" style="border-right: 1px solid #f1f5f9; padding-right: 20px;">
                         <h2>Showing Preference</h2>
-                        <label>Showing Windows (usually 8 am - 8:30 pm):</label><input type="text">
-                        <label>How many hours notice before the showing?</label>
+                        <label>Showing Windows (8 am - 8:30 pm):</label><input type="text" name="show_windows">
+                        <label>Hours notice before showing:</label>
                         <div class="checkbox-row">
-                            <input type="checkbox"> None <input type="checkbox"> 2-4H 
-                            <input type="checkbox"> Overnight <input type="checkbox"> 24H
+                            <input type="checkbox" name="notice_none"> None <input type="checkbox" name="notice_4h"> 2-4H 
+                            <input type="checkbox" name="notice_overnight"> Overnight <input type="checkbox" name="notice_24h"> 24H
                         </div>
                         <label>Access:</label>
-                        <div class="checkbox-row"><input type="checkbox"> Direct <input type="checkbox"> Lockbox</div>
-                        <p class="disclaimer">**Direct: must be present at all time during the showing**</p>
+                        <div class="checkbox-row"><input type="checkbox" name="access_direct"> Direct <input type="checkbox" name="access_lockbox"> Lockbox</div>
+                        <p style="font-size: 10px; color: #718096; margin-top: 5px;">*Direct: must be present at all time during the showing</p>
                     </div>
-                    <div>
+                    <div class="col">
                         <h2>General Questions</h2>
-                        <div class="checkbox-row"><label>Would you like to have open house?</label> <input type="checkbox"> YES <input type="checkbox"> NO</div>
-                        <label>What is the name of your favourite Restaurant?</label><input type="text">
-                        <label>What is your family's favourite Holiday?</label><input type="text">
-                        <label>What is your family's favourite Activity?</label><input type="text">
-                        <label>Is there anything we can do to make this process more convenient and enjoyable for you?</label><input type="text">
+                        <label>Would you like to have an open house?</label>
+                        <div class="checkbox-row"><input type="checkbox" name="open_house_yes"> YES <input type="checkbox" name="open_house_no"> NO</div>
+                        <label>Favourite Restaurant:</label><input type="text" name="fav_restaurant">
+                        <label>Favourite Holiday:</label><input type="text" name="fav_holiday_seller">
+                        <label>Favourite Activity:</label><input type="text" name="fav_activity_seller">
                     </div>
                 </div>
-            </div>
-
-            <div class="card">
-                <h2>Driver's License UPLOAD</h2>
-                <label>Please upload a clear photo of your Driver's License:</label>
-                <input type="file" name="seller_id_file" accept="image/*,.pdf">
+                <label>Anything we can do to make this process enjoyable?</label><textarea name="extra_requests_seller"></textarea>
+                
+                <label>Driver's License UPLOAD (FINTRAC):</label>
+                <input type="file" name="seller_id_file">
             </div>
 
             <button type="submit" class="btn-submit">SUBMIT SELLER FORM</button>
@@ -335,6 +391,7 @@
         document.getElementById('p-seller').classList.toggle('active', t === 'seller');
         document.getElementById('btn-b').className = 'tab-btn' + (t === 'buyer' ? ' active-buyer' : '');
         document.getElementById('btn-s').className = 'tab-btn' + (t === 'seller' ? ' active-seller' : '');
+        window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzKnf3RNiJAK80TonocYkFBWLTuSyb_qQKWAe0MLb4QWFkH_xv4ni7ncLxuNCQn-jCv/exec';
@@ -344,19 +401,18 @@
         f.addEventListener('submit', e => {
             e.preventDefault();
             const b = f.querySelector('.btn-submit');
-            const originalText = b.innerText;
-            b.innerText = "Sending...";
+            b.innerText = "Submitting..."; b.disabled = true;
             
             fetch(scriptURL, { method: 'POST', body: new FormData(f)})
-                .then(r => { 
-                    alert('Success! Your form has been submitted.');
-                    f.reset(); 
-                    b.innerText = originalText; 
-                })
-                .catch(e => { 
-                    alert('Error submitting form. Please try again.'); 
-                    b.innerText = originalText; 
-                });
+                .then(() => { alert('Form Submitted Successfully!'); f.reset(); b.innerText = "SUBMIT FORM"; b.disabled = false; })
+                .catch(() => { alert('Error submitting form.'); b.disabled = false; });
+        });
+    });
+
+    document.querySelectorAll('.checkbox-row').forEach(row => {
+        const checkboxes = row.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', () => { if (cb.checked) checkboxes.forEach(other => { if (other !== cb) other.checked = false; }); });
         });
     });
 </script>
