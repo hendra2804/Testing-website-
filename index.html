@@ -19,7 +19,7 @@
             font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
             background-color: var(--bg-color);
             margin: 0;
-            padding: 40px 20px;
+            padding: 20px 10px; /* Reduced padding for mobile */
             color: var(--text-main);
         }
 
@@ -29,8 +29,8 @@
         .tab-container {
             display: flex;
             justify-content: center;
-            margin-bottom: 40px;
-            gap: 10px;
+            margin-bottom: 30px;
+            gap: 8px;
             background: #fff;
             padding: 6px;
             border-radius: 50px;
@@ -41,8 +41,8 @@
         }
 
         .tab-btn {
-            padding: 12px 40px;
-            font-size: 14px;
+            padding: 10px 25px;
+            font-size: 12px;
             font-weight: 700;
             cursor: pointer;
             border: none;
@@ -61,13 +61,13 @@
 
         @keyframes formReveal { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* CARDS & WATERMARK */
+        /* CARDS */
         .card {
             position: relative;
             background-color: var(--card-white);
             border: 1px solid var(--border-color);
-            padding: 40px;
-            margin-bottom: 30px;
+            padding: 30px 20px;
+            margin-bottom: 25px;
             border-radius: 16px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             overflow: hidden;
@@ -96,33 +96,74 @@
             justify-content: space-between;
             align-items: center;
             padding: 0;
-            height: 130px;
+            height: 100px; /* Adjusted for mobile */
             border: none;
         }
         .header-card::before { display: none; }
         .seller-header { background-color: var(--remax-red); }
 
-        .title-area h1 { margin-left: 40px; font-size: 32px; font-weight: 800; color: white; text-transform: uppercase; }
-        .logo-area-img { background: white; height: 100%; padding: 0 40px; display: flex; align-items: center; clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%); }
-        .logo-area-img img { height: 70px; width: auto; }
+        .title-area h1 { margin-left: 20px; font-size: 22px; font-weight: 800; color: white; text-transform: uppercase; }
+        .logo-area-img { background: white; height: 100%; padding: 0 20px; display: flex; align-items: center; clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%); }
+        .logo-area-img img { height: 50px; width: auto; }
 
-        h2 { font-size: 16px; color: var(--remax-blue); border-left: 4px solid var(--remax-blue); padding-left: 15px; margin-bottom: 25px; text-transform: uppercase; font-weight: 800; }
+        h2 { font-size: 15px; color: var(--remax-blue); border-left: 4px solid var(--remax-blue); padding-left: 15px; margin-bottom: 20px; text-transform: uppercase; font-weight: 800; }
         #p-seller h2 { color: var(--remax-red); border-left-color: var(--remax-red); }
 
         label { font-size: 11px; font-weight: 700; display: block; margin-bottom: 8px; color: var(--text-muted); text-transform: uppercase; }
         
         input[type="text"], input[type="email"], input[type="tel"], textarea {
-            width: 100%; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-bottom: 20px; outline: none; background: #f8fafc; box-sizing: border-box; font-family: inherit;
+            width: 100%; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 15px; margin-bottom: 20px; outline: none; background: #f8fafc; box-sizing: border-box; font-family: inherit;
+            text-align: left; /* KEPT LEFT ALIGNED */
         }
 
-        .row { display: flex; gap: 30px; flex-wrap: wrap; }
-        .col { flex: 1; min-width: 300px; }
+        .row { display: flex; gap: 20px; flex-wrap: wrap; }
+        .col { flex: 1; min-width: 100%; } /* Stacks columns on mobile */
+        
+        @media (min-width: 768px) {
+            .col { min-width: 300px; }
+            .title-area h1 { font-size: 32px; margin-left: 40px; }
+            .header-card { height: 130px; }
+            .logo-area-img img { height: 70px; }
+        }
 
-        .checkbox-row { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-size: 13px; font-weight: 600; }
-        .checkbox-row input { width: 18px; height: 18px; cursor: pointer; accent-color: var(--remax-blue); }
+        /* CHECKBOXES - VERTICAL ON MOBILE */
+        .checkbox-row { 
+            display: flex; 
+            flex-direction: column; /* Vertical stacking */
+            gap: 12px; 
+            margin-bottom: 20px; 
+            font-size: 13px; 
+            font-weight: 600; 
+        }
+
+        /* CHECKBOXES - HORIZONTAL ON DESKTOP */
+        @media (min-width: 600px) {
+            .checkbox-row {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+        }
+
+        .checkbox-row label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            margin-bottom: 0;
+            text-transform: none; /* YES/NO looks better normal */
+        }
+
+        .checkbox-row input { 
+            width: 20px; 
+            height: 20px; 
+            cursor: pointer; 
+            accent-color: var(--remax-blue); 
+            margin: 0;
+        }
         #p-seller .checkbox-row input { accent-color: var(--remax-red); }
 
-        .fintrac-footer { text-align: center; font-weight: 800; color: #c53030; margin: 40px 0; padding: 25px; background: #fff5f5; border: 1px solid #feb2b2; font-size: 11px; border-radius: 12px; }
+        .fintrac-footer { text-align: center; font-weight: 800; color: #c53030; margin: 30px 0; padding: 20px; background: #fff5f5; border: 1px solid #feb2b2; font-size: 10px; border-radius: 12px; }
 
         .btn-submit { display: block; width: 100%; padding: 20px; background: #1a202c; color: white; border: none; font-weight: 700; font-size: 16px; cursor: pointer; border-radius: 12px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
         .btn-submit:hover { background: #000; transform: translateY(-2px); }
@@ -147,9 +188,6 @@
             </div>
             
             <div class="card">
-                <label>PROPERTY ADDRESS:</label>
-                <input type="text" name="property_address">
-                
                 <h2>CONTACT DETAILS</h2>
                 <div class="row">
                     <div class="col">
@@ -169,22 +207,28 @@
                 <div class="row">
                     <div class="col">
                         <label>Children:</label>
-                        <div class="checkbox-row"><input type="checkbox" name="has_children_yes"> YES <input type="checkbox" name="has_children_no"> NO</div>
+                        <div class="checkbox-row">
+                            <label><input type="checkbox" name="has_children_yes"> YES</label>
+                            <label><input type="checkbox" name="has_children_no"> NO</label>
+                        </div>
                         <label>How Many and Age:</label><input type="text" name="children_info">
                     </div>
                     <div class="col">
                         <label>Pets:</label>
-                        <div class="checkbox-row"><input type="checkbox" name="has_pets_yes"> YES <input type="checkbox" name="has_pets_no"> NO</div>
+                        <div class="checkbox-row">
+                            <label><input type="checkbox" name="has_pets_yes"> YES</label>
+                            <label><input type="checkbox" name="has_pets_no"> NO</label>
+                        </div>
                         <label>Specify:</label><input type="text" name="pets_info">
                     </div>
                 </div>
 
                 <label>Preferred Method Communication:</label>
                 <div class="checkbox-row">
-                    <input type="checkbox" name="comm_whatsapp"> WhatsApp Group 
-                    <input type="checkbox" name="comm_email"> Email 
-                    <input type="checkbox" name="comm_text"> Text 
-                    <input type="checkbox" name="comm_phone"> Phone Call
+                    <label><input type="checkbox" name="comm_whatsapp"> WhatsApp Group</label> 
+                    <label><input type="checkbox" name="comm_email"> Email</label> 
+                    <label><input type="checkbox" name="comm_text"> Text</label> 
+                    <label><input type="checkbox" name="comm_phone"> Phone Call</label>
                 </div>
             </div>
 
@@ -193,18 +237,30 @@
                 <div class="row">
                     <div class="col">
                         <label>Interested in:</label>
-                        <div class="checkbox-row"><input type="checkbox" name="type_new"> New <input type="checkbox" name="type_resale"> Resale <input type="checkbox" name="type_both"> Both</div>
+                        <div class="checkbox-row">
+                            <label><input type="checkbox" name="type_new"> New</label>
+                            <label><input type="checkbox" name="type_resale"> Resale</label>
+                            <label><input type="checkbox" name="type_both"> Both</label>
+                        </div>
                         <label>First Time Home Buyer:</label>
-                        <div class="checkbox-row"><input type="checkbox" name="first_timer_yes"> YES <input type="checkbox" name="first_timer_no"> NO</div>
+                        <div class="checkbox-row">
+                            <label><input type="checkbox" name="first_timer_yes"> YES</label>
+                            <label><input type="checkbox" name="first_timer_no"> NO</label>
+                        </div>
                         <label>Pre-Approval:</label>
-                        <div class="checkbox-row"><input type="checkbox" name="preapproved_yes"> YES <input type="checkbox" name="preapproved_no"> NO</div>
+                        <div class="checkbox-row">
+                            <label><input type="checkbox" name="preapproved_yes"> YES</label>
+                            <label><input type="checkbox" name="preapproved_no"> NO</label>
+                        </div>
                         <label>Specify Amount ($):</label><input type="text" name="preapproval_amount">
                     </div>
                     <div class="col">
                         <label>Move-In Date to New House:</label>
                         <div class="checkbox-row">
-                            <input type="checkbox" name="move_1m"> &lt;1 Month <input type="checkbox" name="move_2m"> 1-2 Months 
-                            <input type="checkbox" name="move_4m"> 2-4 Months <input type="checkbox" name="move_4plus"> &gt;4 Months
+                            <label><input type="checkbox" name="move_1m"> &lt;1 Month</label>
+                            <label><input type="checkbox" name="move_2m"> 1-2 Months</label>
+                            <label><input type="checkbox" name="move_4m"> 2-4 Months</label>
+                            <label><input type="checkbox" name="move_4plus"> &gt;4 Months</label>
                         </div>
                         <label>Preferred Days and Time to view properties:</label>
                         <input type="text" name="viewing_time">
@@ -213,10 +269,10 @@
 
                 <label>Type / Style Property that you'd interested in for purchasing:</label>
                 <div class="checkbox-row">
-                    <input type="checkbox" name="style_detached"> Detached
-                    <input type="checkbox" name="style_semi"> Semi-Detached
-                    <input type="checkbox" name="style_townhouse"> Townhouse
-                    <input type="checkbox" name="style_commercial"> Commercial
+                    <label><input type="checkbox" name="style_detached"> Detached</label>
+                    <label><input type="checkbox" name="style_semi"> Semi-Detached</label>
+                    <label><input type="checkbox" name="style_townhouse"> Townhouse</label>
+                    <label><input type="checkbox" name="style_commercial"> Commercial</label>
                 </div>
                 
                 <div class="row">
@@ -236,13 +292,22 @@
                 <div class="row">
                     <div class="col">
                         <label>Have you purchased or sold a house before?</label>
-                        <div class="checkbox-row"><input type="checkbox" name="history_yes"> YES <input type="checkbox" name="history_no"> NO</div>
+                        <div class="checkbox-row">
+                            <label><input type="checkbox" name="history_yes"> YES</label>
+                            <label><input type="checkbox" name="history_no"> NO</label>
+                        </div>
                         <label>Do you need to sell your property before you buy?</label>
-                        <div class="checkbox-row"><input type="checkbox" name="need_sell_yes"> YES <input type="checkbox" name="need_sell_no"> NO</div>
+                        <div class="checkbox-row">
+                            <label><input type="checkbox" name="need_sell_yes"> YES</label>
+                            <label><input type="checkbox" name="need_sell_no"> NO</label>
+                        </div>
                     </div>
                     <div class="col">
                         <label>Are you currently in a Lease?</label>
-                        <div class="checkbox-row"><input type="checkbox" name="lease_yes"> YES <input type="checkbox" name="lease_no"> NO</div>
+                        <div class="checkbox-row">
+                            <label><input type="checkbox" name="lease_yes"> YES</label>
+                            <label><input type="checkbox" name="lease_no"> NO</label>
+                        </div>
                         <label>If Yes, specify (When/Where) and Expiry Date:</label>
                         <input type="text" name="lease_details">
                     </div>
@@ -275,9 +340,6 @@
             </div>
 
             <div class="card">
-                <label>PROPERTY ADDRESS:</label>
-                <input type="text" name="property_address">
-                
                 <h2>CONTACT DETAILS</h2>
                 <div class="row">
                     <div class="col">
@@ -297,22 +359,28 @@
                 <div class="row">
                     <div class="col">
                         <label>Children:</label>
-                        <div class="checkbox-row"><input type="checkbox" name="has_children_yes"> YES <input type="checkbox" name="has_children_no"> NO</div>
+                        <div class="checkbox-row">
+                            <label><input type="checkbox" name="has_children_yes"> YES</label>
+                            <label><input type="checkbox" name="has_children_no"> NO</label>
+                        </div>
                         <label>How Many and Age:</label><input type="text" name="children_info">
                     </div>
                     <div class="col">
                         <label>Pets:</label>
-                        <div class="checkbox-row"><input type="checkbox" name="has_pets_yes"> YES <input type="checkbox" name="has_pets_no"> NO</div>
+                        <div class="checkbox-row">
+                            <label><input type="checkbox" name="has_pets_yes"> YES</label>
+                            <label><input type="checkbox" name="has_pets_no"> NO</label>
+                        </div>
                         <label>Specify:</label><input type="text" name="pets_info">
                     </div>
                 </div>
 
                 <label>Preferred Method Communication:</label>
                 <div class="checkbox-row">
-                    <input type="checkbox" name="comm_whatsapp"> WhatsApp Group 
-                    <input type="checkbox" name="comm_email"> Email 
-                    <input type="checkbox" name="comm_text"> Text 
-                    <input type="checkbox" name="comm_phone"> Phone Call
+                    <label><input type="checkbox" name="comm_whatsapp"> WhatsApp Group</label> 
+                    <label><input type="checkbox" name="comm_email"> Email</label> 
+                    <label><input type="checkbox" name="comm_text"> Text</label> 
+                    <label><input type="checkbox" name="comm_phone"> Phone Call</label>
                 </div>
             </div>
 
@@ -321,26 +389,41 @@
                 <div class="row">
                     <div class="col">
                         <label>Type:</label>
-                        <div class="checkbox-row"><input type="checkbox" name="type_freehold"> Freehold <input type="checkbox" name="type_condo"> Condominium</div>
+                        <div class="checkbox-row">
+                            <label><input type="checkbox" name="type_freehold"> Freehold</label>
+                            <label><input type="checkbox" name="type_condo"> Condominium</label>
+                        </div>
                         <label>Maintenance Fee:</label>
-                        <div class="checkbox-row"><input type="checkbox" name="maint_yes"> YES <input type="checkbox" name="maint_no"> NO</div>
+                        <div class="checkbox-row">
+                            <label><input type="checkbox" name="maint_yes"> YES</label>
+                            <label><input type="checkbox" name="maint_no"> NO</label>
+                        </div>
                         <label>• If Yes, Whats included:</label><input type="text" name="maint_details">
                         <label>Rental Items (e.g. Water Heater):</label>
-                        <div class="checkbox-row"><input type="checkbox" name="rental_yes"> YES <input type="checkbox" name="rental_no"> NO</div>
+                        <div class="checkbox-row">
+                            <label><input type="checkbox" name="rental_yes"> YES</label>
+                            <label><input type="checkbox" name="rental_no"> NO</label>
+                        </div>
                         <label>• If Yes, Please Specify:</label><input type="text" name="rental_details">
                     </div>
                     <div class="col">
                         <label>Property Tax: $</label><input type="text" name="property_tax">
                         <label>Unit Size (in SqFt):</label><input type="text" name="unit_size">
                         <label>Have you been upgraded the house?</label>
-                        <div class="checkbox-row"><input type="checkbox" name="upgrade_yes"> YES <input type="checkbox" name="upgrade_no"> NO</div>
+                        <div class="checkbox-row">
+                            <label><input type="checkbox" name="upgrade_yes"> YES</label>
+                            <label><input type="checkbox" name="upgrade_no"> NO</label>
+                        </div>
                         <label>• If Yes, Please specify:</label><textarea name="upgrade_details" rows="2"></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
                         <label>Occupancy:</label>
-                        <div class="checkbox-row"><input type="checkbox" name="occ_vacant"> Vacant <input type="checkbox" name="occ_tenanted"> Tenanted</div>
+                        <div class="checkbox-row">
+                            <label><input type="checkbox" name="occ_vacant"> Vacant</label>
+                            <label><input type="checkbox" name="occ_tenanted"> Tenanted</label>
+                        </div>
                         <label>If Tenanted, provide Number & Email:</label><input type="text" name="tenant_contact">
                     </div>
                     <div class="col">
@@ -351,22 +434,30 @@
 
             <div class="card">
                 <div class="row">
-                    <div class="col" style="border-right: 1px solid #f1f5f9; padding-right: 20px;">
+                    <div class="col">
                         <h2>Showing Preference</h2>
                         <label>Showing Windows (8 am - 8:30 pm):</label><input type="text" name="show_windows">
                         <label>Hours notice before showing:</label>
                         <div class="checkbox-row">
-                            <input type="checkbox" name="notice_none"> None <input type="checkbox" name="notice_4h"> 2-4H 
-                            <input type="checkbox" name="notice_overnight"> Overnight <input type="checkbox" name="notice_24h"> 24H
+                            <label><input type="checkbox" name="notice_none"> None</label>
+                            <label><input type="checkbox" name="notice_4h"> 2-4H</label> 
+                            <label><input type="checkbox" name="notice_overnight"> Overnight</label>
+                            <label><input type="checkbox" name="notice_24h"> 24H</label>
                         </div>
                         <label>Access:</label>
-                        <div class="checkbox-row"><input type="checkbox" name="access_direct"> Direct <input type="checkbox" name="access_lockbox"> Lockbox</div>
+                        <div class="checkbox-row">
+                            <label><input type="checkbox" name="access_direct"> Direct</label>
+                            <label><input type="checkbox" name="access_lockbox"> Lockbox</label>
+                        </div>
                         <p style="font-size: 10px; color: #718096; margin-top: 5px;">*Direct: must be present at all time during the showing</p>
                     </div>
                     <div class="col">
                         <h2>General Questions</h2>
                         <label>Would you like to have an open house?</label>
-                        <div class="checkbox-row"><input type="checkbox" name="open_house_yes"> YES <input type="checkbox" name="open_house_no"> NO</div>
+                        <div class="checkbox-row">
+                            <label><input type="checkbox" name="open_house_yes"> YES</label>
+                            <label><input type="checkbox" name="open_house_no"> NO</label>
+                        </div>
                         <label>Favourite Restaurant:</label><input type="text" name="fav_restaurant">
                         <label>Favourite Holiday:</label><input type="text" name="fav_holiday_seller">
                         <label>Favourite Activity:</label><input type="text" name="fav_activity_seller">
